@@ -1,0 +1,10 @@
+html {
+    background-color: darkgrey;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
+#first-page {
+    text-align: center;
+    vertical-align: middle;
+}
