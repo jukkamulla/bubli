@@ -1,13 +1,20 @@
 
-var red = [0, 100, 63];
-var orange = [40, 100, 60];
-var green = [75, 100, 40];
-var blue = [196, 77, 55];
-var purple = [280, 50, 60];
+var bubbleContainer = document.getElementsByClassName("bubble-container")[0];
+var dimension = 5;
+var value = 0;
 
-var myName = "Bubli";
-var letterColors = [red, green, orange, blue, purple];
-bubbleShape = "circle";
-
-drawName(myName, letterColors);
-bounceBubbles()
+function buildGameTable() {
+    for (var i = 0; i < dimension; i++) {
+        for (var j = 0; j < dimension; j++) {
+            value++;
+            var newDiv = document.createElement('div');
+            newDiv.classList.add("bubble");
+            newDiv.classList.add("bubble-row");
+            var valueElement = document.createElement('p');
+            valueElement.classList.add("expression");
+            newDiv.appendChild(valueElement);
+            bubbleContainer.appendChild(newDiv);
+        }
+    }
+}
+buildGameTable(); 
