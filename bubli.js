@@ -22,6 +22,7 @@ buildGameTable();*/
 var time = 0;
 var sequenceTime = 10;
 var interval;
+var level = 0;
 
 function elapsedTime(){
     time++;
@@ -46,4 +47,13 @@ function elapsedTime(){
 
 function play(){
     interval = setInterval(elapsedTime, sequenceTime);
+    time = 0;
+}
+
+function win(){
+    clearInterval(interval);
+    level++;
+    var levelNumber = document.getElementById("level-number");
+    levelNumber.innerHTML = level.toString();
+
 }
