@@ -1,7 +1,12 @@
 
-/*var bubbleContainer = document.getElementsByClassName("bubble-container")[0];
+var bubbleContainer = document.getElementsByClassName("bubble-container")[0];
 var dimension = 5;
 var value = 0;
+var time = 0;
+var sequenceTime = 10;
+var interval;
+var level = 0;
+
 
 function buildGameTable() {
     for (var i = 0; i < dimension; i++) {
@@ -17,12 +22,6 @@ function buildGameTable() {
         }
     }
 }
-buildGameTable();*/
-
-var time = 0;
-var sequenceTime = 10;
-var interval;
-var level = 0;
 
 function elapsedTime(){
     time++;
@@ -48,6 +47,8 @@ function elapsedTime(){
 function play(){
     interval = setInterval(elapsedTime, sequenceTime);
     time = 0;
+    removeBlinking();
+    buildGameTable();
 }
 
 function win(){
@@ -55,5 +56,23 @@ function win(){
     level++;
     var levelNumber = document.getElementById("level-number");
     levelNumber.innerHTML = level.toString();
+    addBlinking();
+    removeGameTable();
+}
 
+function addBlinking(){
+    var play = document.getElementById("button");
+    play.classList.add("blinking");
+}
+
+function removeBlinking(){
+    var play = document.getElementById("button");
+    play.classList.remove("blinking");
+}
+
+function removeGameTable(){
+    var container = document.getElementById("container");
+    while (container.firstChild){
+        container.removeChild(container.firstChild);
+    }
 }
