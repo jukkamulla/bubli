@@ -23,25 +23,33 @@ function buildGameTable() {
     }
 }
 
+function setTimerElements(second, hundredSecond){
+    var timer = document.getElementById("timer").firstChild;
+    timer.innerHTML = second + ":" + hundredSecond;
+}
+
+function setElapsedTime(numberArray) {
+    var second;
+    var hundredSecond;
+    second = numberArray[0].toString();
+    if (numberArray[1] == undefined) {
+        numberArray[1] = "00"
+    }
+    hundredSecond = numberArray[1].toString();
+    if (numberArray[0] < 10) {
+        second = "0" + numberArray[0]
+    }
+    if (numberArray[1].length === 1) {
+        hundredSecond = numberArray[1] + "0"
+    }
+    setTimerElements(second, hundredSecond);
+}
+
 function elapsedTime(){
     time++;
     var seconds = time / 100;
     var numberArray = seconds.toString().split(".");
-    var second;
-    var hundredSecond;
-    var timer = document.getElementById("timer").firstChild;
-    second = numberArray[0].toString();
-    if (numberArray[1] == undefined){
-        numberArray[1] = "00"
-    }
-    hundredSecond = numberArray[1].toString();
-    if (numberArray[0] < 10){
-        second = "0" + numberArray[0]
-    }
-    if (numberArray[1].length === 1){
-        hundredSecond = numberArray[1] + "0"
-    }
-    timer.innerHTML = second + ":" + hundredSecond;
+    setElapsedTime(numberArray);
 }
 
 function play(){
