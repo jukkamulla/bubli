@@ -7,7 +7,6 @@ var sequenceTime = 10;
 var interval;
 var level = 0;
 
-
 function buildGameTable() {
     for (var i = 0; i < dimension; i++) {
         for (var j = 0; j < dimension; j++) {
@@ -57,6 +56,13 @@ function play(){
     time = 0;
     removeBlinking();
     buildGameTable();
+    setRandomGoalNumber();
+}
+
+function setRandomGoalNumber(){
+    var randomNumber = Math.floor((Math.random() * 99) + 1);
+    var goalNumberElement = document.getElementById("goal-number").firstChild;
+    goalNumberElement.innerHTML = randomNumber.toString();
 }
 
 function win(){
