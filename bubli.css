@@ -116,6 +116,13 @@ p {
     margin: auto;
 }
 
+.bubble-container p {
+    font-size: 40px;
+    margin: 0;
+    vertical-align: middle;
+    text-align: center;
+}
+
 #timer p {
     font-size: 40px;
     text-align: center;
