@@ -4,7 +4,8 @@ var dimension = 5;
 var value = 0;
 var time = 0;
 var sequenceTime = 10;
-var interval;
+var timerInterval;
+var bubbleInterval;
 var level = 0;
 
 function buildGameTable() {
@@ -52,21 +53,37 @@ function elapsedTime(){
 }
 
 function play(){
-    interval = setInterval(elapsedTime, sequenceTime);
+    timerInterval = setInterval(elapsedTime, sequenceTime);
+    bubbleInterval = setInterval(setValueOfBubbles, 3000);
     time = 0;
     removeBlinking();
     buildGameTable();
     setRandomGoalNumber();
+    setValueOfBubbles();
+}
+
+function randomNumber(min, max){
+    return Math.floor(Math.random()*(max-min+1)+min);
 }
 
 function setRandomGoalNumber(){
-    var randomNumber = Math.floor((Math.random() * 99) + 1);
+    var goalNumber = randomNumber(30, 100);
     var goalNumberElement = document.getElementById("goal-number").firstChild;
-    goalNumberElement.innerHTML = randomNumber.toString();
+    goalNumberElement.innerHTML = goalNumber.toString();
+}
+
+function setValueOfBubbles(){
+    var bubbles = document.getElementsByClassName("bubble");
+    for (var i = 0; i < bubbles.length; i++) {
+        var bubbleValue = randomNumber(1, 20);
+        var bubbleDiv = bubbles[i];
+        var bubbleP = bubbleDiv.firstChild;
+        bubbleP.innerHTML = bubbleValue.toString();
+    }
 }
 
 function win(){
-    clearInterval(interval);
+    clearInterval(timerInterval);
     level++;
     var levelNumber = document.getElementById("level-number");
     levelNumber.innerHTML = level.toString();
