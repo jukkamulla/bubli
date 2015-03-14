@@ -72,13 +72,27 @@ function setRandomGoalNumber(){
     goalNumberElement.innerHTML = goalNumber.toString();
 }
 
+function visibility(bubbleValue, bubbleP, bubbleDiv) {
+    if (bubbleValue < 10 || bubbleValue > 50) {
+        bubbleP.classList.remove("expression-visible");
+        bubbleDiv.classList.remove("bubble-visible");
+        bubbleP.classList.add("hided-expression");
+        bubbleDiv.classList.add("hided-bubble");
+    } else {
+        bubbleP.classList.remove("hided-expression");
+        bubbleDiv.classList.remove("hided-bubble");
+        bubbleP.classList.add("expression-visible");
+        bubbleDiv.classList.add("bubble-visible");
+    }
+}
 function setValueOfBubbles(){
     var bubbles = document.getElementsByClassName("bubble");
     for (var i = 0; i < bubbles.length; i++) {
-        var bubbleValue = randomNumber(1, 20);
+        var bubbleValue = randomNumber(1, 99);
         var bubbleDiv = bubbles[i];
         var bubbleP = bubbleDiv.firstChild;
         bubbleP.innerHTML = bubbleValue.toString();
+        visibility(bubbleValue, bubbleP, bubbleDiv);
     }
 }
 

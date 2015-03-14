@@ -116,11 +116,16 @@ p {
     margin: auto;
 }
 
-.bubble-container p {
-    font-size: 40px;
-    margin: 0;
-    vertical-align: middle;
-    text-align: center;
+.hided-bubble, .hided-expression{
+    opacity:0;
+    transition:visibility 0s linear 0.5s,opacity 0.5s linear;
+}
+
+.bubble-visible, .expression-visible {
+    -moz-transition: opacity 0.7s linear;
+    -o-transition: opacity 0.7s linear;
+    -webkit-transition: opacity 0.7s linear;
+    transition: opacity 0.7s linear;
 }
 
 #timer p {
@@ -146,7 +151,7 @@ p {
 
 }
 
-#goal-number p, #counter-number p {
+#goal-number p, #counter-number p, .bubble-container p {
     font-size: 40px;
     margin: 0;
     vertical-align: middle;
