@@ -67,9 +67,9 @@ function randomNumber(min, max){
 }
 
 function setRandomGoalNumber(){
-    var goalNumber = randomNumber(30, 100);
-    var goalNumberElement = document.getElementById("goal-number").firstChild;
-    goalNumberElement.innerHTML = goalNumber.toString();
+    var randomGoalNumber = randomNumber(30, 100);
+    var randomGoalNumberElement = document.getElementById("goal-number").firstChild;
+    randomGoalNumberElement.innerHTML = randomGoalNumber.toString();
 }
 
 function visibility(bubbleValue, bubbleP, bubbleDiv) {
@@ -103,6 +103,7 @@ function win(){
     levelNumber.innerHTML = level.toString();
     addBlinking();
     removeGameTable();
+    congratulation();
 }
 
 function addBlinking(){
@@ -121,3 +122,40 @@ function removeGameTable(){
         container.removeChild(container.firstChild);
     }
 }
+
+function congratulation(){
+    var message = document.getElementById("message");
+    var messageText = document.createElement("p");
+    messageText.innerHTML = "Nice work!";
+    message.appendChild(messageText);
+}
+
+document.addEventListener('click', function(event) {
+    event = event || window.event;
+    var target = event.target || event.srcElement;
+    var elementOpacity = window.getComputedStyle(target, null).getPropertyValue('opacity');
+    var text = target.textContent;
+    if (target.className ==! "expression expression-visible" && target.className ==! "bubble bubble-row bubble-visible") {
+        return false;
+    }
+    if (elementOpacity > 0) {
+        var counterElement = document.getElementById("counter-number").firstChild;
+        var goalNumber = parseInt(document.getElementById("goal-number").firstChild.innerHTML);
+        var counterNumber = parseInt(counterElement.innerHTML);
+        if (isNaN(counterNumber)) {
+            counterNumber = 0;
+        }
+        var clickedNumber = parseInt(text);
+        if (isNaN(clickedNumber)) {
+            clickedNumber = 0;
+        }
+        var newCounterValue = counterNumber + clickedNumber;
+        if (newCounterValue > goalNumber) {
+            newCounterValue = 0;
+        }
+        counterElement.innerHTML = (newCounterValue).toString();
+    }
+}, false);
+
+
+

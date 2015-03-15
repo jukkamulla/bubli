@@ -82,7 +82,7 @@ p {
     width: 60%;
 }
 
-#message {
+#message p {
     text-align: center;
     cursor: pointer;
     z-index: 1;
