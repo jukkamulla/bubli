@@ -82,13 +82,10 @@ p {
     width: 60%;
 }
 
-#message p {
+#message p, .message {
+    font-size: 30px;
     text-align: center;
-    cursor: pointer;
-    z-index: 1;
-    position: absolute;
-    margin-top: 230px;
-    margin-left: 300px;
+    margin-top: 250px;
 }
 
 #tools {

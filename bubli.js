@@ -72,6 +72,17 @@ function setRandomGoalNumber(){
     randomGoalNumberElement.innerHTML = randomGoalNumber.toString();
 }
 
+function setValueOfBubbles(){
+    var bubbles = document.getElementsByClassName("bubble");
+    for (var i = 0; i < bubbles.length; i++) {
+        var bubbleValue = randomNumber(1, 99);
+        var bubbleDiv = bubbles[i];
+        var bubbleP = bubbleDiv.firstChild;
+        bubbleP.innerHTML = bubbleValue.toString();
+        visibility(bubbleValue, bubbleP, bubbleDiv);
+    }
+}
+
 function visibility(bubbleValue, bubbleP, bubbleDiv) {
     if (bubbleValue < 10 || bubbleValue > 50) {
         bubbleP.classList.remove("expression-visible");
@@ -83,16 +94,6 @@ function visibility(bubbleValue, bubbleP, bubbleDiv) {
         bubbleDiv.classList.remove("hided-bubble");
         bubbleP.classList.add("expression-visible");
         bubbleDiv.classList.add("bubble-visible");
-    }
-}
-function setValueOfBubbles(){
-    var bubbles = document.getElementsByClassName("bubble");
-    for (var i = 0; i < bubbles.length; i++) {
-        var bubbleValue = randomNumber(1, 99);
-        var bubbleDiv = bubbles[i];
-        var bubbleP = bubbleDiv.firstChild;
-        bubbleP.innerHTML = bubbleValue.toString();
-        visibility(bubbleValue, bubbleP, bubbleDiv);
     }
 }
 
@@ -126,7 +127,8 @@ function removeGameTable(){
 function congratulation(){
     var message = document.getElementById("message");
     var messageText = document.createElement("p");
-    messageText.innerHTML = "Nice work!";
+    messageText.innerHTML = "Nice work! Press to Play for new round!";
+    messageText.classList.add("message");
     message.appendChild(messageText);
 }
 
@@ -152,6 +154,9 @@ document.addEventListener('click', function(event) {
         var newCounterValue = counterNumber + clickedNumber;
         if (newCounterValue > goalNumber) {
             newCounterValue = 0;
+        } else if (newCounterValue === goalNumber) {
+            clearInterval(1);
+            win();
         }
         counterElement.innerHTML = (newCounterValue).toString();
     }
