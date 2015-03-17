@@ -4,6 +4,7 @@ var dimension = 5;
 var value = 0;
 var time = 0;
 var sequenceTime = 10;
+var visibilityTime = 2500;
 var timerInterval;
 var bubbleInterval;
 var level = 0;
@@ -54,12 +55,13 @@ function elapsedTime(){
 
 function play(){
     timerInterval = setInterval(elapsedTime, sequenceTime);
-    bubbleInterval = setInterval(setValueOfBubbles, 3000);
+    bubbleInterval = setInterval(setValueOfBubbles, visibilityTime);
     time = 0;
     removeBlinking();
     buildGameTable();
     setRandomGoalNumber();
     setValueOfBubbles();
+    removeAllChild("message");
 }
 
 function randomNumber(min, max){
@@ -75,7 +77,7 @@ function setRandomGoalNumber(){
 function setValueOfBubbles(){
     var bubbles = document.getElementsByClassName("bubble");
     for (var i = 0; i < bubbles.length; i++) {
-        var bubbleValue = randomNumber(1, 99);
+        var bubbleValue = randomNumber(-50, 50);
         var bubbleDiv = bubbles[i];
         var bubbleP = bubbleDiv.firstChild;
         bubbleP.innerHTML = bubbleValue.toString();
@@ -84,7 +86,7 @@ function setValueOfBubbles(){
 }
 
 function visibility(bubbleValue, bubbleP, bubbleDiv) {
-    if (bubbleValue < 10 || bubbleValue > 50) {
+    if (bubbleValue < -20 || bubbleValue > 30) {
         bubbleP.classList.remove("expression-visible");
         bubbleDiv.classList.remove("bubble-visible");
         bubbleP.classList.add("hided-expression");
@@ -103,7 +105,7 @@ function win(){
     var levelNumber = document.getElementById("level-number");
     levelNumber.innerHTML = level.toString();
     addBlinking();
-    removeGameTable();
+    removeAllChild("container");
     congratulation();
 }
 
@@ -117,8 +119,8 @@ function removeBlinking(){
     play.classList.remove("blinking");
 }
 
-function removeGameTable(){
-    var container = document.getElementById("container");
+function removeAllChild(id){
+    var container = document.getElementById(id);
     while (container.firstChild){
         container.removeChild(container.firstChild);
     }
@@ -132,14 +134,7 @@ function congratulation(){
     message.appendChild(messageText);
 }
 
-document.addEventListener('click', function(event) {
-    event = event || window.event;
-    var target = event.target || event.srcElement;
-    var elementOpacity = window.getComputedStyle(target, null).getPropertyValue('opacity');
-    var text = target.textContent;
-    if (target.className ==! "expression expression-visible" && target.className ==! "bubble bubble-row bubble-visible") {
-        return false;
-    }
+function collectionPossibilities(elementOpacity, text) {
     if (elementOpacity > 0) {
         var counterElement = document.getElementById("counter-number").firstChild;
         var goalNumber = parseInt(document.getElementById("goal-number").firstChild.innerHTML);
@@ -160,6 +155,16 @@ document.addEventListener('click', function(event) {
         }
         counterElement.innerHTML = (newCounterValue).toString();
     }
+}
+document.addEventListener('click', function(event) {
+    event = event || window.event;
+    var target = event.target || event.srcElement;
+    var elementOpacity = window.getComputedStyle(target, null).getPropertyValue('opacity');
+    var text = target.textContent;
+    if (target.className ==! "expression expression-visible" && target.className ==! "bubble bubble-row bubble-visible") {
+        return false;
+    }
+    collectionPossibilities(elementOpacity, text);
 }, false);
 
 
