@@ -59,6 +59,7 @@ function play(){
     time = 0;
     removeBlinking();
     buildGameTable();
+    setCounterElement(0);
     setRandomGoalNumber();
     setValueOfBubbles();
     removeAllChild("message");
@@ -134,11 +135,17 @@ function congratulation(){
     message.appendChild(messageText);
 }
 
+function setCounterElement(value){
+    var counterElement = document.getElementById("counter-number").firstChild;
+    counterElement.innerHTML = value.toString();
+}
+
 function collectionPossibilities(elementOpacity, text) {
     if (elementOpacity > 0) {
         var counterElement = document.getElementById("counter-number").firstChild;
         var goalNumber = parseInt(document.getElementById("goal-number").firstChild.innerHTML);
         var counterNumber = parseInt(counterElement.innerHTML);
+
         if (isNaN(counterNumber)) {
             counterNumber = 0;
         }
@@ -150,7 +157,8 @@ function collectionPossibilities(elementOpacity, text) {
         if (newCounterValue > goalNumber) {
             newCounterValue = 0;
         } else if (newCounterValue === goalNumber) {
-            clearInterval(1);
+            clearInterval(timerInterval);
+            clearInterval(bubbleInterval);
             win();
         }
         counterElement.innerHTML = (newCounterValue).toString();
