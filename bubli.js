@@ -87,16 +87,24 @@ function setValueOfBubbles(){
 }
 
 function visibility(bubbleValue, bubbleP, bubbleDiv) {
-    if (bubbleValue < -20 || bubbleValue > 30) {
+    function hideBubbles() {
         bubbleP.classList.remove("expression-visible");
         bubbleDiv.classList.remove("bubble-visible");
         bubbleP.classList.add("hided-expression");
         bubbleDiv.classList.add("hided-bubble");
-    } else {
+    }
+
+    function showBubbles() {
         bubbleP.classList.remove("hided-expression");
         bubbleDiv.classList.remove("hided-bubble");
         bubbleP.classList.add("expression-visible");
         bubbleDiv.classList.add("bubble-visible");
+    }
+
+    if (bubbleValue < -20 || bubbleValue > 30) {
+        hideBubbles();
+    } else {
+        showBubbles();
     }
 }
 
